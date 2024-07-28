@@ -1,0 +1,34 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 
+      sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 
+      monospace;
+}
+
+.hotel-background {
+  background-image: url('C:\\Users\\bhujb\\OneDrive\\Desktop\\login-signup\\login-signup\\src\\Components\\Assets\\background4.jpg');
+}
+
+.guest-background {
+  background-image: url('C:\\Users\\bhujb\\OneDrive\\Desktop\\login-signup\\login-signup\\src\\Components\\Assets\\hotelbackgrounda.png');
+}
+
+.full-screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
