@@ -8,6 +8,7 @@ export const MainPage = () => {
       <div className="button-container">
         <div className="button-section">
           <button className="button">Insert a Room</button>
+ 
         </div>
         <div className="button-section">
           <button className="button">Delete a Room</button>
