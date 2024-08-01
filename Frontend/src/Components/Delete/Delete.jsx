@@ -1,12 +1,38 @@
 import React, { useState } from 'react';
 import './Delete.css'; 
+import axios from 'axios';
+import { getToken } from '../../SaveToken';
+import { useNavigate } from 'react-router-dom';
 
 const Delete = () => {
+  const navigate = useNavigate();
   const [roomId, setRoomId] = useState('');
-
-  const handleDelete = (e) => {
+  const handleDelete = async(e) => {
     e.preventDefault();
-    console.log("Room to Delete:", roomId);
+    try{
+      const token = getToken(); 
+      const result = await axios.post('http://localhost:3001/deleterooms', {
+      roomnumber : roomId
+  }, 
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  if (result.status === 400) {
+    console.log("Room cannot be nserted");
+    return;
+  }
+
+  // Log the result data for successful requests
+  console.log(result.data);
+  navigate('/main');
+    
+
+}catch(error){
+  console.log("Error in fetching data", error);
+}
 
    
   };
@@ -28,7 +54,7 @@ const Delete = () => {
           />
         </div>
 
-        <button type="submit" className="delete-submit-button">Delete Room</button>
+        <button type="submit" className="delete-submit-button" onClick={handleDelete}>Delete Room</button>
       </form>
     </div>
   );

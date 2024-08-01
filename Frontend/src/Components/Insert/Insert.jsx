@@ -1,20 +1,51 @@
 import React, { useState } from 'react';
 import './Insert.css'; 
+import axios  from 'axios';
+import { getToken } from '../../SaveToken';
+import { useNavigate } from 'react-router-dom';
 
 const Insert = () => {
   const [roomId, setRoomId] = useState('');
   const [roomType, setRoomType] = useState('');
   const [price, setPrice] = useState('');
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate('');
+  const HandleInsert = async (e) => {
     e.preventDefault();
-    console.log("New Room Details:", { roomId, roomType, price });
+  
+    try {
+      const token = getToken(); 
+      const result = await axios.post('http://localhost:3001/insertrooms',
+        {
+          roomnumber: roomId,
+          type: roomType,
+          price: price
+        },
+        {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+        
+      });
+  
+      if (result.status === 400) {
+        console.log("Room cannot be nserted");
+        return;
+      }
+  
+      // Log the result data for successful requests
+      console.log(result.data);
+      navigate('/main');
+  
+    } catch (error) {
+      console.log("Error in server", error);
+    }
   };
+  
 
   return (
     <div className="form-container">
       <h1 className="form-title">Insert New Room</h1>
-      <form onSubmit={handleSubmit} className="room-form">
+      <form className="room-form">
         <div className="form-group">
           <label htmlFor="roomId" className="form-label">Room ID:</label>
           <input
@@ -57,7 +88,7 @@ const Insert = () => {
           />
         </div>
 
-        <button type="submit" className="submit-button">Insert Room</button>
+        <button type="submit" className="submit-button" onClick={HandleInsert}>Insert Room</button>
       </form>
     </div>
   );

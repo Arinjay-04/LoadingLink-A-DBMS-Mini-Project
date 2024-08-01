@@ -15,11 +15,11 @@ code {
 }
 
 .hotel-background {
-  background-image: url('C:\\Users\\bhujb\\OneDrive\\Desktop\\login-signup\\login-signup\\src\\Components\\Assets\\background4.jpg');
+  background-image: url('/home/arijnju/Documents/DBMS Project/Frontend/src/Components/Assets/background4.jpg');
 }
 
 .guest-background {
-  background-image: url('C:\\Users\\bhujb\\OneDrive\\Desktop\\login-signup\\login-signup\\src\\Components\\Assets\\hotelbackgrounda.png');
+  background-image: url('/home/arijnju/Documents/DBMS Project/Frontend/src/Components/Assets/hotelbackgrounda.png');
 }
 
 .full-screen {
