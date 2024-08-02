@@ -7,6 +7,7 @@ import GuestSignup from './Components/GuestLoginSignup/GuestSignup'
 import MainPage from './Components/MainPage/MainPage'
 import Insert from './Components/Insert/Insert'
 import Delete from './Components/Delete/Delete'
+import Update from './Components/Update/Update'
 import './App.css';
 import './index.css';
 
@@ -21,8 +22,8 @@ function App() {
         <Route path="/" element={<div>Welcome to the Hotel Management System</div>} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/insert" element={<Insert />} />
+        <Route path="/update" element={<Update />} />
         <Route path="/delete" element={<Delete/>} />
-        
       </Routes>
     </Router>
   );
