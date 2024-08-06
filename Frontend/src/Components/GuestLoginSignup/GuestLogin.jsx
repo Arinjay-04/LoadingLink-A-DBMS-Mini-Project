@@ -4,6 +4,7 @@ import './GuestLoginSignup.css';
 import email_icon from '../Assets/email.png';
 import password_icon from '../Assets/password.png';
 import { Link, useNavigate } from 'react-router-dom';
+import { saveToken } from '../../SaveToken';
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ const Login = ({ handleLogin }) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
       try{
-        const response = await axios.post('http://localhost:3001/logincustomer', {
+        const response = await axios.post('http://localhost:3001/api/auth/login/customer', {
             email,
             password
             
@@ -32,8 +33,15 @@ const Login = ({ handleLogin }) => {
         }
         
 
-        navigate('/');
-        console.log("success");
+        const token = response.data.token;
+        if (token) {
+            console.log('Token received:', token);
+            saveToken(token); 
+            navigate('/mainguest');
+            console.log("Login successful");
+        } else {
+            console.error('Token not found in response');
+        }
 
 
       }catch(error){

@@ -11,7 +11,7 @@ export const MainPage = () => {
   
     try {
       const token = getToken(); 
-      const result = await axios.get('http://localhost:3001/availableroom', {
+      const result = await axios.get('http://localhost:3001/api/rooms', {
         headers: {
           Authorization: `Bearer ${token}`
         }

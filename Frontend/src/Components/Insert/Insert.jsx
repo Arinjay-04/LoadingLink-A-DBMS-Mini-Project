@@ -14,7 +14,7 @@ const Insert = () => {
   
     try {
       const token = getToken(); 
-      const result = await axios.post('http://localhost:3001/insertrooms',
+      const result = await axios.post('http://localhost:3001/api/rooms/insert',
         {
           roomnumber: roomId,
           type: roomType,

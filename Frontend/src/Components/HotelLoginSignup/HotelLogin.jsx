@@ -18,34 +18,32 @@ const Login = ({ handleLogin }) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-      try{
-        const response = await axios.post('http://localhost:3001/loginhotel', {
+    try {
+        const response = await axios.post('http://localhost:3001/api/auth/login/hotel', {
             email,
             password
-            
-        })
+        });
 
-
-        if(response.status === 400){
-            console.log(response.token);
+        if (response.status === 400) {
+            console.error('Error: ', response.data.message); // Log the error message
             return;
         }
-        
 
         const token = response.data.token;
-        console.log(token);
-        saveToken(token); 
-
-        navigate('/main');
-        console.log("success");
-
-
-      }catch(error){
-
-      }
-  };
+        if (token) {
+            console.log('Token received:', token);
+            saveToken(token); 
+            navigate('/main');
+            console.log("Login successful");
+        } else {
+            console.error('Token not found in response');
+        }
+    } catch (error) {
+        console.error('Error during login:', error.response ? error.response.data : error.message); // Log the error
+    }
+};
 
   return (
     <div className='container'>

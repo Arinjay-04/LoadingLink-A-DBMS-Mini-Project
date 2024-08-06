@@ -28,7 +28,7 @@ const Register = ({ handleRegister }) => {
     // handleRegister({ name, email, password, phone, address });
     e.preventDefault();
       try{
-        const response = await axios.post('http://localhost:3001/signupcustomer', {
+        const response = await axios.post('http://localhost:3001/api/guest/create', {
             firstname, lastname,  address, phone, email, password   
         })
 

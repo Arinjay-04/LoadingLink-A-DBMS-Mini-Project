@@ -7,34 +7,33 @@ import { useNavigate } from 'react-router-dom';
 const Delete = () => {
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState('');
-  const handleDelete = async(e) => {
+
+  const handleDelete = async (e) => {
     e.preventDefault();
-    try{
+    try {
       const token = getToken(); 
-      const result = await axios.post('http://localhost:3001/deleterooms', {
-      roomnumber : roomId
-  }, 
-  {
-    headers: {
-      Authorization: `Bearer ${token}`
+
+      // Assuming room ID should be sent as a query parameter
+      const result = await axios.post(`http://localhost:3001/api/rooms/delete`, {
+        roomnumber: roomId
+      },{
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+       
+         
+      });
+
+      if (result.status === 200) {
+        console.log("Room deleted successfully");
+        navigate('/main');
+      } else {
+        console.log("Error: Unable to delete room");
+      }
+
+    } catch (error) {
+      console.log("Error in deleting room:", error);
     }
-  });
-
-  if (result.status === 400) {
-    console.log("Room cannot be nserted");
-    return;
-  }
-
-  // Log the result data for successful requests
-  console.log(result.data);
-  navigate('/main');
-    
-
-}catch(error){
-  console.log("Error in fetching data", error);
-}
-
-   
   };
 
   return (
@@ -54,7 +53,7 @@ const Delete = () => {
           />
         </div>
 
-        <button type="submit" className="delete-submit-button" onClick={handleDelete}>Delete Room</button>
+        <button type="submit" className="delete-submit-button">Delete Room</button>
       </form>
     </div>
   );

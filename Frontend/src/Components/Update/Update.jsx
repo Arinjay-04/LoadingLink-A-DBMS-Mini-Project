@@ -16,7 +16,7 @@ const Update = () => {
 
     try {
       const token = getToken(); 
-      const result = await axios.put('http://localhost:3001/updateroom',
+      const result = await axios.put('http://localhost:3001/api/rooms/update',
         {
           roomnumber: roomId,
           type: roomType,
