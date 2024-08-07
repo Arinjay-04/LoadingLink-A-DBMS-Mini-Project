@@ -32,7 +32,7 @@ This project is designed to manage hotels, rooms, and guests. It provides functi
 - **Backend:** Node.js, Express.js
 - **Database:** PostgreSQL
 - **ORM:** N/A (Direct SQL queries)
-- **Authentication:** JWT (Optional, if added)
+- **Authentication:** JWT 
 
 ## Setup and Installation
 
