@@ -4,9 +4,10 @@ import user_icon from '../Assets/person.png';
 import email_icon from '../Assets/email.png';
 import password_icon from '../Assets/password.png';
 import phone_icon from '../Assets/phone.png';
-import hotel from '../Assets/hotel.png';
+// import hotel from '../Assets/hotel.png';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
+import image from '../Assets/Signup.svg'
 
 const Register = ({ handleRegister }) => {
   const [firstname, setfName] = useState('');
@@ -48,6 +49,7 @@ const Register = ({ handleRegister }) => {
   };
 
   return (
+    <div className='main'>
     <div className='container'>
       <div className="header">
         <div className="text">Register</div>
@@ -102,7 +104,7 @@ const Register = ({ handleRegister }) => {
           />
         </div>
         <div className="input">
-          <img className="icon3" src={hotel} alt="Hotel Icon" />
+          {/* <img className="icon3" src={hotel} alt="Hotel Icon" /> */}
           <input
             type="text"
             placeholder="Address"
@@ -113,6 +115,11 @@ const Register = ({ handleRegister }) => {
         </div>
       </div>
       <div className="submit" onClick={handleSubmit}>Register</div>
+    </div>
+    <div className="image-container">
+        <img src={image} alt="Signup illustration" className="signup-image" />
+      </div>
+
     </div>
   );
 }

@@ -14,13 +14,13 @@ code {
       monospace;
 }
 
-.hotel-background {
+/* .hotel-background {
   background-image: url('/home/arijnju/Documents/DBMS Project/Frontend/src/Components/Assets/background4.jpg');
-}
+} */
 
-.guest-background {
+/* .guest-background {
   background-image: url('/home/arijnju/Documents/DBMS Project/Frontend/src/Components/Assets/hotelbackgrounda.png');
-}
+} */
 
 .full-screen {
   height: 100vh;

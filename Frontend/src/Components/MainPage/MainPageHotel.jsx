@@ -43,7 +43,7 @@ export const MainPage = () => {
           <button className="button" onClick={() => navigate('/delete')}>Delete a Room</button>
         </div>
         <div className="button-section">
-          <button className="button" onClick={HandleView}>View Available Rooms</button>
+          <button className="button" onClick={() => navigate('/hotelroom')}>View Available Rooms</button>
         </div>
         <div className="button-section">
           <button className="button" onClick={() => navigate('/update')}>Update a Room</button>

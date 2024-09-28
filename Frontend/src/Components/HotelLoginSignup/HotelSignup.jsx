@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './HotelLoginSignup.css';
+import './Login.css';
 import user_icon from '../Assets/person.png';
 import email_icon from '../Assets/email.png';
 import password_icon from '../Assets/password.png';
@@ -8,6 +8,8 @@ import hotel from '../Assets/hotel.png';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import { saveToken } from '../../SaveToken';
+import image from '../Assets/hotelsignup.svg'
+
 
 const Register = ({ handleRegister }) => {
   const [name, setName] = useState('');
@@ -49,13 +51,14 @@ const Register = ({ handleRegister }) => {
   };
 
   return (
-    <div className='container'>
-      <div className="header">
-        <div className="text">Register</div>
-        <div className="underline"></div>
+    <div className='main'>
+    <div className='container1'>
+      <div className="header1">
+        <div className="text1">Register</div>
+        <div className="underline1"></div>
       </div>
-      <div className="inputs">
-        <div className="input">
+      <div className="inputs1">
+        <div className="input1">
           <img className="icon2" src={user_icon} alt="User Icon" />
           <input
             type="text"
@@ -65,7 +68,7 @@ const Register = ({ handleRegister }) => {
             required
           />
         </div>
-        <div className="input">
+        <div className="input1">
           <img className="icon2" src={email_icon} alt="Email Icon" />
           <input
             type="email"
@@ -75,7 +78,7 @@ const Register = ({ handleRegister }) => {
             required
           />
         </div>
-        <div className="input">
+        <div className="input1">
           <img className="icon2" src={password_icon} alt="Password Icon" />
           <input
             type="password"
@@ -85,7 +88,7 @@ const Register = ({ handleRegister }) => {
             required
           />
         </div>
-        <div className="input">
+        <div className="input1">
           <img className="icon2" src={phone_icon} alt="Phone Icon" />
           <input
             type="tel"
@@ -95,7 +98,7 @@ const Register = ({ handleRegister }) => {
             required
           />
         </div>
-        <div className="input">
+        <div className="input1">
           <img className="icon3" src={hotel} alt="Hotel Icon" />
           <input
             type="text"
@@ -106,7 +109,12 @@ const Register = ({ handleRegister }) => {
           />
         </div>
       </div>
-      <div className="submit" onClick={handleSubmit}>Register</div>
+      <div className="submit1" onClick={handleSubmit}>Register</div>
+    </div>
+    <div className="image-container1">
+        <img src={image} alt="Signup illustration" className="signup-image" />
+      </div>
+
     </div>
   );
 }
