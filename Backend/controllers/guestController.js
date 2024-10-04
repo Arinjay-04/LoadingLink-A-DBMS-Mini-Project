@@ -3,8 +3,6 @@ const db = require('../config/db');
 exports.createGuest = async (req, res) => {
     try {
         const { firstname, lastname, address, phone, email, password } = req.body;
-
-        // Insert the new user into the database
         const result = await db.query(
             "INSERT INTO guest (fistname, lastname, address, phone, email, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING guestid",
             [firstname, lastname, address, phone, email, password]

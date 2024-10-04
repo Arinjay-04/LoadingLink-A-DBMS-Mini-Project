@@ -1,5 +1,6 @@
 const db = require('../config/db');
-const { generateToken, verifyToken } = require('../utils/jwt');
+const { verifyToken, generateToken} = require('../utils/jwt');
+const bycrpt = require('bcryptjs')
 
 exports.loginHotel = async (req, res) => {
     try {
@@ -17,10 +18,7 @@ exports.loginHotel = async (req, res) => {
 
         const user = result.rows[0];
 
-        console.log("Fetched User Password:", user.password);
-        console.log("Fetched User Hotel ID:", user.hotelid);
-
-        if (user.password !== password) {
+        if (await bycrpt.compare(password , user.password) === false) {
             return res.status(401).send("Incorrect password");
         }
         

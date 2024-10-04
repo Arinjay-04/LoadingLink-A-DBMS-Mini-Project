@@ -1,68 +1,52 @@
-const { verifyToken } = require('../utils/jwt');
+const { verifyToken, generateToken } = require('../utils/jwt');
 
-const authMiddlewareHotel = (req, res, next) => {
+// Common token verification logic
+const verifyAuthorizationToken = (req, res, entityType) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
         console.error('Unauthorized: No token provided');
-        return res.status(401).send('Unauthorized: No token provided');
+        return res.status(401).json({ message: 'Unauthorized: No token provided' });
     }
 
     const tokenParts = authHeader.split(' ');
 
     if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
         console.error('Unauthorized: Invalid token format');
-        return res.status(401).send('Unauthorized: Invalid token format');
+        return res.status(401).json({ message: 'Unauthorized: Invalid token format. Expected "Bearer <token>"' });
     }
 
     const token = tokenParts[1];
-    
-    try {
-        const hotelId = verifyToken(token);
 
-        if (!hotelId) {
+    try {
+        const id = verifyToken(token);
+
+        if (!id) {
             console.error('Unauthorized: Invalid token');
-            return res.status(401).send('Unauthorized: Invalid token');
+            return res.status(401).json({ message: 'Unauthorized: Invalid token' });
         }
 
-        req.hotelId = hotelId;
-        next();
+        // Attach either hotelId or userId based on the entityType
+        req[entityType] = id;
+        return true; // Success
     } catch (error) {
         console.error('Unauthorized: Token verification failed', error);
-        return res.status(401).send('Unauthorized: Token verification failed');
+        res.status(401).json({ message: 'Unauthorized: Token verification failed', error });
+        return false; // Failure
     }
 };
 
+// Middleware for hotel authentication
+const authMiddlewareHotel = (req, res, next) => {
+    if (verifyAuthorizationToken(req, res, 'hotelId')) {
+        next(); // Proceed to next middleware if token is valid
+    }
+};
+
+// Middleware for guest authentication
 const authMiddlewareGuest = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader) {
-        console.error('Unauthorized: No token provided');
-        return res.status(401).send('Unauthorized: No token provided');
-    }
-
-    const tokenParts = authHeader.split(' ');
-
-    if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
-        console.error('Unauthorized: Invalid token format');
-        return res.status(401).send('Unauthorized: Invalid token format');
-    }
-
-    const token = tokenParts[1];
-    
-    try {
-        const userId = verifyToken(token);
-
-        if (!userId) {
-            console.error('Unauthorized: Invalid token');
-            return res.status(401).send('Unauthorized: Invalid token');
-        }
-
-        req.userId = userId;
-        next();
-    } catch (error) {
-        console.error('Unauthorized: Token verification failed', error);
-        return res.status(401).send('Unauthorized: Token verification failed');
+    if (verifyAuthorizationToken(req, res, 'userId')) {
+        next(); // Proceed to next middleware if token is valid
     }
 };
 

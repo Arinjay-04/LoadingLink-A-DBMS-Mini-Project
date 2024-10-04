@@ -1,9 +1,12 @@
 const db = require('../config/db');
+const bycrpt = require('bcryptjs')
 
 exports.createHotel = async (req, res) => {
     try {
         const { name, address, phone, email, password } = req.body;
-        const result = await db.query("INSERT INTO hotel (name, address, phone, email, password) VALUES ($1, $2, $3, $4, $5)", [name, address, phone, email, password]);
+        const hashpassword = await bycrpt.hash(password, 10);
+        
+        const result = await db.query("INSERT INTO hotel (name, address, phone, email, password) VALUES ($1, $2, $3, $4, $5)", [name, address, phone, email, hashpassword]);
 
         if (result.rowCount === 0) {
             return res.status(400).send("Failed to insert data");

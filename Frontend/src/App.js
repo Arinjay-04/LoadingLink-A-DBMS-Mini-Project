@@ -12,6 +12,7 @@ import Delete from './Components/Delete/Delete';
 import Update from './Components/Update/Update';
 import LandingPage from './Components/Landing/Landing'
 import HotelRoom from './Components/Rooms/HotelRoom';
+import Error from './Components/UnauthorizeToken/error.jsx';
 import './App.css';
 import './index.css';
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/delete" element={<Delete />} />
         <Route path="/hotelroom" element={<HotelRoom />} />
         <Route path="/rooms/:id" element={<Rooms />} /> {/* Updated route path */}
+        <Route path="/error" element={<Error/>}/>
       </Routes>
     </Router>
   );
